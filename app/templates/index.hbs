@@ -2,18 +2,9 @@
   SPLASH!
 </div>
 <div class="well">
-    <a id="signin">inloggen</a>
-    <a id="signout">uitloggen</a>
-  <script>
-      var signinLink = document.getElementById('signin');
-        if (signinLink) {
-          signinLink.onclick = function() { navigator.id.request(); };
-        }
-        
-        var signoutLink = document.getElementById('signout');
-        if (signoutLink) {
-          signoutLink.onclick = function() { navigator.id.logout(); };
-        }
-    </script>
-    
+    {{#if user.email}}
+        <a {{action 'logout'}}>uitloggen</a>
+    {{else}}
+        <a {{action 'login'}}>inloggen</a>
+    {{/if}}
 </div>
