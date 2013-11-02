@@ -1,23 +1,164 @@
-<!doctype html>
+﻿<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Mocha Spec Runner</title>
-    <link rel="stylesheet" href="lib/mocha/mocha.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>Locate Button</title>
+  <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+  <style>
+    html, body, #map {
+      padding:0;
+      margin:0;
+      height:100%;
+    }
+    #LocateButton {
+      position: absolute;
+      top: 95px;
+      left: 20px;
+      z-index: 50;
+    }
+  </style>
+  <script src="//js.arcgis.com/3.7/"></script>
+  <script>
+      var map;
+
+      
+
+      function locationError(error) {
+          switch (error.code) {
+              case error.PERMISSION_DENIED:
+                  alert("Location not provided");
+                  break;
+              case error.POSITION_UNAVAILABLE:
+                  alert("Current location not available");
+                  break;
+              case error.TIMEOUT:
+                  alert("Timeout");
+                  break;
+              default:
+                  alert("unknown error : " + error);
+                  break;
+          }
+      }
+
+      
+
+      function showLocation(location) {
+          //zoom to the users location and add a graphic
+          alert('Got location');
+          var pt = new Point(location.coords.longitude, location.coords.latitude);
+          if (!graphic) {
+              addGraphic(pt);
+          } else { // move the graphic if it already exists
+              graphic.setGeometry(pt);
+          }
+          map.centerAt(pt);
+      }
+
+      function addGraphic(pt) {
+          var symbol = new SimpleMarkerSymbol(
+            SimpleMarkerSymbol.STYLE_CIRCLE,
+            12,
+            new SimpleLineSymbol(
+              SimpleLineSymbol.STYLE_SOLID,
+              new Color([210, 105, 30, 0.5]),
+              8
+            ),
+            new Color([210, 105, 30, 0.9])
+          );
+          graphic = new Graphic(pt, symbol);
+          map.graphics.add(graphic);
+      }
+
+      require([
+      "esri/map",
+      "esri/layers/FeatureLayer",
+      "esri/dijit/LocateButton",
+      "esri/arcgis/utils",
+      "esri/geometry/Point",
+      "esri/symbols/SimpleMarkerSymbol",
+      "dojo/_base/Color",
+      "esri/graphic",
+      "dojo/domReady!"
+    ], function (
+      Map, FeatureLayer, LocateButton, arcgisUtils, Point, SimpleMarkerSymbol, Color, Graphic
+    ) {
+
+        var options = {
+            enableHighAccuracy: true,
+            frequency: 3000
+        };
+        var markerSymbol = new SimpleMarkerSymbol();
+        markerSymbol.setStyle = "circle";
+        //markerSymbol.setPath("M16,4.938c-7.732,0-14,4.701-14,10.5c0,1.981,0.741,3.833,2.016,5.414L2,25.272l5.613-1.44c2.339,1.316,5.237,2.106,8.387,2.106c7.732,0,14-4.701,14-10.5S23.732,4.938,16,4.938zM16.868,21.375h-1.969v-1.889h1.969V21.375zM16.772,18.094h-1.777l-0.176-8.083h2.113L16.772,18.094z");
+        markerSymbol.setColor(new Color("#FF0000"));
+
+        var getLocation = function () {
+            if (navigator.geolocation) {
+
+                //$.mobile.showPageLoadingMsg();
+                //true hides the dialog
+                //if you want to track as the user moves setup navigator.geolocation.watchPostion
+                navigator.geolocation.watchPosition(zoomToLocation, locationError, options);
+                //navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
+                //alert('Got location');
+            }
+        };
+
+        var playerGraphic;
+
+        var zoomToLocation = function (location) {
+            //alert("Got location");
+            var pt = new Point(location.coords.longitude, location.coords.latitude);
+            if (playerGraphic)
+                map.graphics.remove(playerGraphic);
+            playerGraphic = new Graphic(pt, markerSymbol);
+            map.graphics.add(playerGraphic);
+            map.centerAndZoom(pt, 16);
+        };
+
+        var webmap = "722155c1b6b145e4897633674104006c";
+        var mapDeferred = arcgisUtils.createMap(webmap, "map", {
+            mapOptions: {
+                //infoWindow: popup,
+                autoResize: false
+            },
+            ignorePopups: false
+
+        });
+
+        /*map = new Map("map", {
+        center: [-56.049, 38.485],
+        zoom: 3,
+        basemap: "topo"
+        });*/
+        mapDeferred.addCallback(function (response) {
+            map = response.map;
+            geoLocate = new LocateButton({
+                map: map
+            }, "LocateButton");
+            geoLocate.startup();
+            //currentItem = response.itemInfo;
+            //$("#webmapTitle").html(currentItem.item.title);
+            //navigator.geolocation.watchPosition(showLocation, locationError);
+            //resizeMap();
+            getLocation();
+        });
+
+        /*var featureLayer = new FeatureLayer("http://services2.arcgis.com/j87K5H4F5R9K07AC/arcgis/rest/services/CityCrushMarkers/FeatureServer/0", {
+        mode: FeatureLayer.MODE_ONDEMAND,
+        outFields: ["*"]
+        });
+        map.addLayer(featureLayer);*/
+
+
+
+    });
+  </script>
 </head>
 <body>
-    <div id="mocha"></div>
-    <script src="lib/mocha/mocha.js"></script>
-    <script>mocha.setup('bdd')</script>
-    <!-- assertion framework -->
-    <script src="lib/chai.js"></script>
-    <script>var expect = chai.expect</script>
-
-    <!-- include source files here... -->
-
-    <!-- include spec files here... -->
-    <script src="spec/test.js"></script>
-
-    <script>mocha.run()</script>
+  <div id="map" class="map">
+    <div id="LocateButton"></div>
+  </div>
 </body>
 </html>
