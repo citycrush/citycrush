@@ -1,0 +1,18 @@
+A new couch has been created
+data:    Database Type: couch
+data:    Database Name: citycrush
+data:    Connection url: http://nodejitsudb9598178276.iriscouch.com:5984
+data:    SSL connection url: https://nodejitsudb9598178276.iriscouch.com:6984
+help:    
+help:    Connect with `curl`:
+help:    
+             $ curl http://nodejitsudb9598178276.iriscouch.com:5984
+help:    
+help:    Connect with the `futon` web app (open in a web browser):
+help:    
+             http://nodejitsudb9598178276.iriscouch.com:5984/_utils
+help:    
+help:    Connect with the `nano` module:
+help:    
+             var nano = require('nano')('http://nodejitsudb9598178276.iriscouch.com:5984');
+help:    
