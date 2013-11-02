@@ -20,7 +20,14 @@
                 <li>{{#linkTo 'game'}}game{{/linkTo}}</li>
                 <li>{{#linkTo 'leaderboard'}}leaderboard{{/linkTo}}</li>
                 <li>{{#linkTo 'battle'}}game{{/linkTo}}</li>
+                 <li class="divider"></li>
+                {{#if user.email}}
+                    <li><a {{action 'logout'}}>uitloggen</a></li>
+                {{else}}
+                    <li><a {{action 'login'}}>inloggen</a></li>
+                {{/if}}
             </ul>
+            
 
         </section>
     </nav>
