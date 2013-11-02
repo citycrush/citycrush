@@ -35,8 +35,4 @@ App.User.FIXTURES = [
         challengesLost: [],
         challengesWon: []
     }
-    
-    
-    
-    
 ] 
