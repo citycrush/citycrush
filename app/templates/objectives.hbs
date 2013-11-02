@@ -1,0 +1,9 @@
+<h1>objectives</h1>
+
+<ul>
+ {{#each model}}
+ <li>{{#linkTo 'objectives' this}}{{this.id}}{{/linkTo}}</li>
+  {{/each}}
+</ul>
+
+{{outlet}}

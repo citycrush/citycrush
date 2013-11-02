@@ -1,0 +1,9 @@
+<h1>splashes</h1>
+
+<ul>
+ {{#each model}}
+ <li>{{#linkTo 'splash' this}}{{this.id}}{{/linkTo}}</li>
+  {{/each}}
+</ul>
+
+{{outlet}}
