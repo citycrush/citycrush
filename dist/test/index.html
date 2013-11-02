@@ -46,8 +46,6 @@
           window.addEventListener('devicemotion', deviceMotionHandler, false);
       }     
 
-
-
       function deviceMotionHandler(eventData) {
           var info, xyz = "[X, Y, Z]";
         
@@ -58,8 +56,7 @@
           var maxaccel = Math.max.apply(Math, info.map(function(i) {
               return Math.abs(i);  
           }));
-          
-          
+        
           if (maxaccel > 18) {
               $("#moRotation").html($("#moRotation").html() + " Shake: " + maxaccel);
               //alert("shake!");
