@@ -7,11 +7,12 @@ Citycrush.ApplicationController = Ember.Controller.extend({
     init: function () {
         this._super();
         this.set('model', this.get('store').findAll('user').get('firstObject'));
+        console.log(this.get('model.email'));
 
         navigator.id.watch({
-            loggedInUser: this.get('model.email'),
+            loggedInUser: this.get('model'),
             onlogin: function (assertion) {
-        
+                
             },
             onlogout: function () {
 
