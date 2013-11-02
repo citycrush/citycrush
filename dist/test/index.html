@@ -41,7 +41,7 @@
           }
       }
 
-      if ((window.DeviceMotionEvent) {
+      if (window.DeviceMotionEvent) {
           window.addEventListener('devicemotion', deviceMotionHandler, false);
       }     
       function deviceMotionHandler(eventData) {
@@ -52,25 +52,27 @@
           info = xyz.replace("X", acceleration.x);
           info = info.replace("Y", acceleration.y);
           info = info.replace("Z", acceleration.z);
-          document.getElementById("moAccel").innerHTML = info;
+          if (info[1] > 3)
+              alert("Shake");
+          //document.getElementById("moAccel").innerHTML = info;
         
           // Grab the acceleration including gravity from the results
           acceleration = eventData.accelerationIncludingGravity;
           info = xyz.replace("X", acceleration.x);
           info = info.replace("Y", acceleration.y);
           info = info.replace("Z", acceleration.z);
-          document.getElementById("moAccelGrav").innerHTML = info;
+          //document.getElementById("moAccelGrav").innerHTML = info;
         
           // Grab the rotation rate from the results
           var rotation = eventData.rotationRate;
           info = xyz.replace("X", rotation.alpha);
           info = info.replace("Y", rotation.beta);
           info = info.replace("Z", rotation.gamma);
-          $("#moRotation").html(info);
+          //$("#moRotation").html(info);
         
           // // Grab the refresh interval from the results
           info = eventData.interval;
-          $("#moInterval").html(info);   
+          //$("#moInterval").html(info);   
       }
       
       
