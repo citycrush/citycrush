@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <script type="application/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+    <div id="moRotation"></div>
+    <div id="moAccel"></div>
+    <div id="moAccellGrav"></div>
+    <div id="moInterval"></div>
+    <script>
+        $(window).on('devicemontion', function(e) {
+            var info, xyz = "[X, Y, Z]",eventData = e.originalEvent;
+            
+            // Grab the acceleration from the results
+            var acceleration = eventData.acceleration;
+            info = xyz.replace("X", acceleration.x);
+            info = info.replace("Y", acceleration.y);
+            info = info.replace("Z", acceleration.z);
+            $("#moAccel").html(info);
+
+            // Grab the acceleration including gravity from the results
+            acceleration = eventData.accelerationIncludingGravity;
+            info = xyz.replace("X", acceleration.x);
+            info = info.replace("Y", acceleration.y);
+            info = info.replace("Z", acceleration.z);
+            $("#moAccelGrav").html(info);
+
+            // Grab the rotation rate from the results
+            var rotation = eventData.rotationRate;
+            info = xyz.replace("X", rotation.alpha);
+            info = info.replace("Y", rotation.beta);
+            info = info.replace("Z", rotation.gamma);
+            $("#moRotation").html(info);
+
+            // // Grab the refresh interval from the results
+            info = eventData.interval;
+            $("#moInterval").html(info);
+        });
+    </script>
+</body>
+
+</html>
