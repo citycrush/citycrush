@@ -56,12 +56,11 @@
           info = [ acceleration.x , acceleration.y, acceleration.z ];
           
           var maxaccel = Math.max.apply(Math, info.map(function(i) {
-              console.log(i);
               return Math.abs(i);  
           }));
           
           
-          if (maxaccel > 3) {
+          if (maxaccel > 18) {
               $("#moRotation").html($("#moRotation").html() + " Shake: " + maxaccel);
               //alert("shake!");
           } else {
