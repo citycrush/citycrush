@@ -32,7 +32,7 @@ module.exports = function (grunt) {
                 tasks: ['emberTemplates']
             },
             compass: {
-                files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+                files: ['<%= yeoman.app %>/scss/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server']
             },
             neuter: {
@@ -127,7 +127,7 @@ module.exports = function (grunt) {
         },
         compass: {
             options: {
-                sassDir: '<%= yeoman.app %>/styles',
+                sassDir: '<%= yeoman.app %>/scss',
                 cssDir: '.tmp/styles',
                 generatedImagesDir: '.tmp/images/generated',
                 imagesDir: '<%= yeoman.app %>/images',
@@ -161,7 +161,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     src: [
-                        '<%= yeoman.dist %>/scripts/{,*/}*.js',
+                        '<%= yeoman.dist %>/scripts/**/*.js',
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
                         '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                         '<%= yeoman.dist %>/styles/fonts/*'
@@ -245,7 +245,8 @@ module.exports = function (grunt) {
                         '*.{ico,txt}',
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
-                        'styles/fonts/*'
+                        'styles/fonts/*',
+                        'scripts/libs/*'
                     ]
                 }]
             }
