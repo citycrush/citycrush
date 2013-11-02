@@ -5,7 +5,9 @@ App.User = DS.Model.extend({
     currentPosition: belongsTo('position'),
     trace: hasMany('position'),
     objectives: hasMany('objective'),
-    coins: attr('number')
+    coins: attr('number'),
+    challengesLost: hasMany('challenges'),
+    challengesWon: hasMany('challenges')
 });
 
 App.User.FIXTURES = [
@@ -17,7 +19,9 @@ App.User.FIXTURES = [
         currentPosition: 3
         trace: [3],
         objectives: [],
-        coins: 45
+        coins: 45,
+        challengesLost: [],
+        challengesWon: []
     },
     {
         id: 2,
@@ -28,6 +32,8 @@ App.User.FIXTURES = [
         trace: [4],
         objectives: [],
         coins: 20
+        challengesLost: [],
+        challengesWon: []
     }
     
     

@@ -2,7 +2,8 @@ App.Battlefield = DS.Model.extend({
     position: belongsTo('position'),
     title: attr('string'),
     start: attr('date'),
-    stop: attr('date')
+    stop: attr('date'),
+    challenges: hasMany('challenge')
 });
 
 App.Battlefield.FIXTURES = [
@@ -11,20 +12,16 @@ App.Battlefield.FIXTURES = [
         position: 1,
         title: "sdfasdf",
         start: null,
-        stop: null
+        stop: null,
+        challenges: [1,2]
+        
     },
     {
         id: 2,
         position: 2,
         title: "sdfasdf",
         start: null,
-        stop: null
-    },
-    {
-        id: 3,
-        position: 3,
-        title: "sdfasdf",
-        start: null,
-        stop: null
+        stop: null,
+        challenges: [3]
     }
 ]
