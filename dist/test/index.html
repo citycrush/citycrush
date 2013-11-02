@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -41,6 +41,38 @@
           }
       }
 
+      if ((window.DeviceMotionEvent) {
+          window.addEventListener('devicemotion', deviceMotionHandler, false);
+      }     
+      function deviceMotionHandler(eventData) {
+          var info, xyz = "[X, Y, Z]";
+        
+          // Grab the acceleration from the results
+          var acceleration = eventData.acceleration;
+          info = xyz.replace("X", acceleration.x);
+          info = info.replace("Y", acceleration.y);
+          info = info.replace("Z", acceleration.z);
+          document.getElementById("moAccel").innerHTML = info;
+        
+          // Grab the acceleration including gravity from the results
+          acceleration = eventData.accelerationIncludingGravity;
+          info = xyz.replace("X", acceleration.x);
+          info = info.replace("Y", acceleration.y);
+          info = info.replace("Z", acceleration.z);
+          document.getElementById("moAccelGrav").innerHTML = info;
+        
+          // Grab the rotation rate from the results
+          var rotation = eventData.rotationRate;
+          info = xyz.replace("X", rotation.alpha);
+          info = info.replace("Y", rotation.beta);
+          info = info.replace("Z", rotation.gamma);
+          $("#moRotation").html(info);
+        
+          // // Grab the refresh interval from the results
+          info = eventData.interval;
+          $("#moInterval").html(info);   
+      }
+      
       
 
       function showLocation(location) {
@@ -85,8 +117,9 @@
     ) {
 
         var options = {
-            enableHighAccuracy: true,
-            frequency: 3000
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0
         };
         var markerSymbol = new SimpleMarkerSymbol();
         markerSymbol.setStyle = "circle";
@@ -104,9 +137,7 @@
                 //alert('Got location');
             }
         };
-
         var playerGraphic;
-
         var zoomToLocation = function (location) {
             //alert("Got location");
             var pt = new Point(location.coords.longitude, location.coords.latitude);
@@ -157,6 +188,8 @@
   </script>
 </head>
 <body>
+    <div id="moRotation"></div>
+    <div id="moInterval"></div>
   <div id="map" class="map">
     <div id="LocateButton"></div>
   </div>
