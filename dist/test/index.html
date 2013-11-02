@@ -22,7 +22,7 @@
   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
   <script>
       var map;
-
+      // 53.221803 6.554418
       
 
       function locationError(error) {
@@ -80,7 +80,29 @@
           info = eventData.interval;
           //$("#moInterval").html(info);   
       }
-      
+
+      function distanceTo(from, to)
+      {
+            var theta = from.x - to.x;
+            var dist = Math.sin(deg2rad(from.y)) * Math.sin(deg2rad(to.y)) + Math.cos(deg2rad(from.y)) * Math.cos(deg2rad(to.y)) * Math.cos(deg2rad(theta));
+            dist = Math.acos(dist);
+            dist = rad2deg(dist);
+            dist = dist * 60 * 1.1515 * 1.609344 * 1000; // distance in meters
+            return dist;
+      }
+
+        function deg2rad(deg)
+        {
+            return (deg * Math.PI / 180.0);
+        }
+
+        //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        //::  This function converts radians to decimal degrees             :::
+        //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        function rad2deg(rad)
+        {
+            return (rad / Math.PI * 180.0);
+        }        
       
 
       function showLocation(location) {
@@ -119,9 +141,10 @@
       "esri/symbols/SimpleMarkerSymbol",
       "dojo/_base/Color",
       "esri/graphic",
+      "dojo/_base/connect",
       "dojo/domReady!"
     ], function (
-      Map, FeatureLayer, LocateButton, arcgisUtils, Point, SimpleMarkerSymbol, Color, Graphic
+      Map, FeatureLayer, LocateButton, arcgisUtils, Point, SimpleMarkerSymbol, Color, Graphic, connect
     ) {
 
         var options = {
@@ -134,26 +157,87 @@
         //markerSymbol.setPath("M16,4.938c-7.732,0-14,4.701-14,10.5c0,1.981,0.741,3.833,2.016,5.414L2,25.272l5.613-1.44c2.339,1.316,5.237,2.106,8.387,2.106c7.732,0,14-4.701,14-10.5S23.732,4.938,16,4.938zM16.868,21.375h-1.969v-1.889h1.969V21.375zM16.772,18.094h-1.777l-0.176-8.083h2.113L16.772,18.094z");
         markerSymbol.setColor(new Color("#FF0000"));
 
+        //var markerSymbolOuter = new SimpleMarkerSymbol();
+        // markerSymbolOuter.setStyle = "circle";
+        //markerSymbol.setPath("M16,4.938c-7.732,0-14,4.701-14,10.5c0,1.981,0.741,3.833,2.016,5.414L2,25.272l5.613-1.44c2.339,1.316,5.237,2.106,8.387,2.106c7.732,0,14-4.701,14-10.5S23.732,4.938,16,4.938zM16.868,21.375h-1.969v-1.889h1.969V21.375zM16.772,18.094h-1.777l-0.176-8.083h2.113L16.772,18.094z");
+        //markerSymbol.setColor(new Color("#FF0000"));
+
         var getLocation = function () {
             if (navigator.geolocation) {
-
-                //$.mobile.showPageLoadingMsg();
-                //true hides the dialog
-                //if you want to track as the user moves setup navigator.geolocation.watchPostion
                 navigator.geolocation.watchPosition(zoomToLocation, locationError, options);
-                //navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
-                //alert('Got location');
             }
         };
         var playerGraphic;
+        var pt;
+        var firstTimeZoom = true;
+        var sym = new esri.symbol.SimpleLineSymbol().setColor(new dojo.Color([0, 0, 0, 1]));
+        var circleGraphic;
+
+        var addCircle = function (pt) {
+            console.log("clicked the map: ", pt);
+            var radius, circle, ring, pts, angle;
+
+            var scaleX = 0.0001;
+            var scaleY = 0.0001;
+
+            var mp2X = new Point(pt.x + scaleX, pt.y);
+            var mp2Y = new Point(pt.x, pt.y + scaleY);
+
+            var distX = distanceTo(pt, mp2X);
+            var distY = distanceTo(pt, mp2Y);
+
+            radius = 20.0;
+
+            var resX = radius / distX * scaleX;
+            var resY = radius / distY * scaleY;
+
+
+            //pt = e.mapPoint;
+            circle = new esri.geometry.Polygon(); //map.spatialReference);
+            ring = []; // point that make up the circle
+            pts = 40; // number of points on the circle
+            angle = 360 / pts; // used to compute points on the circle
+            for (var i = 1; i <= pts; i++) {
+                // convert angle to raidans
+                var radians = i * angle * Math.PI / 180;
+                // add point to the circle
+                ring.push([pt.x + (resX) * Math.cos(radians), pt.y + (resY) * Math.sin(radians)]);
+            }
+            ring.push(ring[0]); // start point needs to == end point
+            circle.addRing(ring);
+            if (circleGraphic)
+                map.graphics.remove(circleGraphic);
+            circleGraphic = new esri.Graphic(circle, sym);
+            map.graphics.add(circleGraphic);
+            console.log("added a graphic");
+        }
+
         var zoomToLocation = function (location) {
-            //alert("Got location");
-            var pt = new Point(location.coords.longitude, location.coords.latitude);
+            // Check distance to objects
+
+            pt = new Point(location.coords.longitude, location.coords.latitude);
             if (playerGraphic)
                 map.graphics.remove(playerGraphic);
             playerGraphic = new Graphic(pt, markerSymbol);
             map.graphics.add(playerGraphic);
-            map.centerAndZoom(pt, 16);
+            addCircle(pt);
+            //map.centerAndZoom(pt, 16);
+            if (firstTimeZoom) {
+                map.centerAt(playerGraphic.geometry);
+                firstTimeZoom = false;
+            }
+            var crushLayer = map.getLayersVisibleAtScale()[1];
+            var distStr = "";
+
+            /*for (var objId in crushLayer.graphics) {
+            var mo = crushLayer.graphics[objId];
+            // Check location
+            var loc1 = esri.geometry.webMercatorToGeographic(mo.geometry);
+            var loc2 = playerGraphic.geometry;
+            var dist = distanceTo(loc1, loc2);
+            distStr += dist + " ";
+            }*/
+            //$("#moRotation").html(distStr);
         };
 
         var webmap = "722155c1b6b145e4897633674104006c";
@@ -173,15 +257,30 @@
         });*/
         mapDeferred.addCallback(function (response) {
             map = response.map;
-            geoLocate = new LocateButton({
-                map: map
+            /*geoLocate = new LocateButton({
+            map: map
             }, "LocateButton");
-            geoLocate.startup();
+            geoLocate.startup();*/
             //currentItem = response.itemInfo;
             //$("#webmapTitle").html(currentItem.item.title);
             //navigator.geolocation.watchPosition(showLocation, locationError);
             //resizeMap();
             getLocation();
+            var crushLayer = map.getLayersVisibleAtScale()[1];
+            connect.connect(crushLayer, "onClick", function (evt) {
+                // Show battle screen if close enough
+                var loc1 = esri.geometry.webMercatorToGeographic(evt.graphic.geometry);
+                var loc2 = playerGraphic.geometry;
+                var dist = distanceTo(loc1, loc2);
+                if (dist < 20) {
+                    $("#moRotation").html("Close enough");
+                    // Open battle screen
+                }
+                else {
+                    $("#moRotation").html("Not close enough");
+                }
+            });
+            //crushLayer.setDefinitionExpression("OBJECTID < 4");
         });
 
         /*var featureLayer = new FeatureLayer("http://services2.arcgis.com/j87K5H4F5R9K07AC/arcgis/rest/services/CityCrushMarkers/FeatureServer/0", {
@@ -196,7 +295,7 @@
   </script>
 </head>
 <body>
-    <div id="moRotation"></div>
+    <div id="moRotation">Status : </div>
     <div id="moInterval"></div>
   <div id="map" class="map">
     <div id="LocateButton"></div>
