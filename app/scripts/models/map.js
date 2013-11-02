@@ -1,6 +1,6 @@
 App.Map = DS.Model.extend({
-    title = attr('string'),
-    esriMapId = attr('string')
+    title: attr('string'),
+    esriMapId: attr('string')
 });
 
 App.Objective.FIXTURES = [

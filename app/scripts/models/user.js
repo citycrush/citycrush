@@ -13,9 +13,9 @@ App.User = DS.Model.extend({
 App.User.FIXTURES = [
     {
         id: 1,
-        email = "user1@citycrush.co",
-        name = "user1",
-        avatar = "/images/avatars/user1.png"
+        email: "user1@citycrush.co",
+        name: "user1",
+        avatar: "/images/avatars/user1.png"
         currentPosition: 3
         trace: [3],
         objectives: [],
@@ -25,9 +25,9 @@ App.User.FIXTURES = [
     },
     {
         id: 2,
-        email = "user2@citycrush.co",
-        name = "user2",
-        avatar = "/images/avatars/user2.png"
+        email: "user2@citycrush.co",
+        name: "user2",
+        avatar: "/images/avatars/user2.png"
         currentPosition: 4
         trace: [4],
         objectives: [],
