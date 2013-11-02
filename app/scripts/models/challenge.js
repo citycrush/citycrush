@@ -1,11 +1,11 @@
-App.Challenge = DS.Model.extend({
+Citycrush.Challenge = DS.Model.extend({
     battlefield: DS.belongsTo('battlefield'),
     moves: DS.hasMany('moves'),
     challenger: DS.belongsTo('user'),
     timestamp: DS.attr('date')
 });
 
-App.Challenges.FIXTURES = [
+Citycrush.Challenges.FIXTURES = [
     {
         id: 1,
         battlefield: 1,

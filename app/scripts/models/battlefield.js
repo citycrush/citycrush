@@ -1,4 +1,4 @@
-App.Battlefield = DS.Model.extend({
+Citycrush.Battlefield = DS.Model.extend({
     position: DS.belongsTo('position'),
     title: DS.attr('string'),
     start: DS.attr('date'),
@@ -6,7 +6,7 @@ App.Battlefield = DS.Model.extend({
     challenges: DS.hasMany('challenge')
 });
 
-App.Battlefield.FIXTURES = [
+Citycrush.Battlefield.FIXTURES = [
     {
         id: 1,
         position: 1,

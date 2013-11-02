@@ -1,9 +1,9 @@
-App.Move = DS.Model.extend({
+Citycrush.Move = DS.Model.extend({
     title: DS.attr('string'),
     beats: DS.hasMany('moves')
 });
 
-App.Move.FIXTURES = [
+Citycrush.Move.FIXTURES = [
     {
         id: 1,
         title: "wave",

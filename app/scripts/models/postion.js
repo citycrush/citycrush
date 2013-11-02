@@ -1,10 +1,10 @@
-App.Position = DS.Model.extend({
+Citycrush.Position = DS.Model.extend({
     lat: DS.attr('number'),
     long: DS.attr('number'),
     timestamp: DS.attr('date')
 });
 
-App.Position.FIXTURES = [
+Citycrush.Position.FIXTURES = [
     {
         id: 1,
         lat: 53.2218,

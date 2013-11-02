@@ -1,4 +1,4 @@
-App.User = DS.Model.extend({
+Citycrush.User = DS.Model.extend({
     email: DS.attr('string'),
     name: DS.attr('string'),
     avatar: DS.attr('string'),
@@ -10,7 +10,7 @@ App.User = DS.Model.extend({
     challengesWon: DS.hasMany('challenges')
 });
 
-App.User.FIXTURES = [
+Citycrush.User.FIXTURES = [
     {
         id: 1,
         email: "user1@citycrush.co",
