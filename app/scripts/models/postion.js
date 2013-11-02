@@ -28,5 +28,17 @@ App.Position.FIXTURES = [
         lat: 53,2220,
         long: 6,5542,
         timestap: null
+    },
+    {
+        id: 5,
+        lat: 53,2221,
+        long: 6,5543,
+        timestap: null
+    },
+    {
+        id: 6,
+        lat: 53,2224,
+        long: 6,5543,
+        timestap: null
     }
 ]

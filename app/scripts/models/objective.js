@@ -22,6 +22,20 @@ App.Objective.FIXTURES = [
         abandonded: null
     },
     {
+        objectiveType: 3,
+        user: 1,
+        started: null,
+        obtained: null,
+        abandonded: null
+    },
+    {
+        objectiveType: 4,
+        user: 1,
+        started: null,
+        obtained: null,
+        abandonded: null
+    },
+    {
         objectiveType: 1,
         user: 2,
         started: null,
@@ -34,5 +48,19 @@ App.Objective.FIXTURES = [
         started: null,
         obtained: null,
         abandonded: null
-    }    
+    },
+    {
+        objectiveType: 3,
+        user: 2,
+        started: null,
+        obtained: null,
+        abandonded: null
+    },
+    {
+        objectiveType: 4,
+        user: 2,
+        started: null,
+        obtained: null,
+        abandonded: null
+    }     
 ] 
