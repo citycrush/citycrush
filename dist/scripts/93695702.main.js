@@ -1,1 +1,0 @@
-!function(){window.Citycrush=Ember.Application.create()}(),function(){Citycrush.Store=DS.Store.extend(),Citycrush.ApplicationAdapter=DS.FixtureAdapter}(),function(){Citycrush.ApplicationRoute=Ember.Route.extend({model:function(){return["red","yellow","blue"]}})}(),function(){Citycrush.Router.map(function(){})}();
