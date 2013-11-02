@@ -6,4 +6,6 @@ Citycrush.Router.map(function () {
   
   this.resource('objectives');
 
+  this.resource('battle');
+  
 });
