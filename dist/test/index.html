@@ -53,32 +53,20 @@
         
           // Grab the acceleration from the results
           var acceleration = eventData.acceleration;
-          info = xyz.replace("X", acceleration.x);
-          info = info.replace("Y", acceleration.y);
-          info = info.replace("Z", acceleration.z);
-          if (info[1] > 3)
-              $("#moRotation").html("Shake");
-          else
-              $("#moRotation").html("");
-          //document.getElementById("moAccel").innerHTML = info;
-        
-          // Grab the acceleration including gravity from the results
-          acceleration = eventData.accelerationIncludingGravity;
-          info = xyz.replace("X", acceleration.x);
-          info = info.replace("Y", acceleration.y);
-          info = info.replace("Z", acceleration.z);
-          //document.getElementById("moAccelGrav").innerHTML = info;
-        
-          // Grab the rotation rate from the results
-          var rotation = eventData.rotationRate;
-          info = xyz.replace("X", rotation.alpha);
-          info = info.replace("Y", rotation.beta);
-          info = info.replace("Z", rotation.gamma);
+          info = [ acceleration.x , acceleration.y, acceleration.z ];
           
-        
-          // // Grab the refresh interval from the results
-          info = eventData.interval;
-          //$("#moInterval").html(info);   
+          var maxaccel = Math.max.apply(Math, info.map(function(i) {
+              console.log(i);
+              return Math.abs(i);  
+          }));
+          
+          
+          if (maxaccel > 3) {
+              $("#moRotation").html($("#moRotation").html() + " Shake: " + maxaccel);
+              //alert("shake!");
+          } else {
+              //$("#moRotation").html("");
+          }
       }
       
       
