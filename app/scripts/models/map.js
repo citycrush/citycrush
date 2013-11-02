@@ -1,6 +1,6 @@
 App.Map = DS.Model.extend({
-    title: attr('string'),
-    esriMapId: attr('string')
+    title: DS.attr('string'),
+    esriMapId: DS.attr('string')
 });
 
 App.Objective.FIXTURES = [
@@ -9,4 +9,4 @@ App.Objective.FIXTURES = [
         title: "Het Noorderplantsoen",
         esriMapId: "722155c1b6b145e4897633674104006c"
     }
-] 
+]; 

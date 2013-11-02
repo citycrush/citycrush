@@ -1,8 +1,8 @@
 App.Challenge = DS.Model.extend({
-    battlefield: belongsTo('battlefield'),
-    moves: hasMany('moves'),
-    challenger: belongsTo('user'),
-    timestamp: attr('date')
+    battlefield: DS.belongsTo('battlefield'),
+    moves: DS.hasMany('moves'),
+    challenger: DS.belongsTo('user'),
+    timestamp: DS.attr('date')
 });
 
 App.Challenges.FIXTURES = [
@@ -28,4 +28,4 @@ App.Challenges.FIXTURES = [
         timestamp: null
     }
 
-]
+];
