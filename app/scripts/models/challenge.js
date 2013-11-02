@@ -5,7 +5,7 @@ Citycrush.Challenge = DS.Model.extend({
     timestamp: DS.attr('date')
 });
 
-Citycrush.Challenges.FIXTURES = [
+Citycrush.Challenge.FIXTURES = [
     {
         id: 1,
         battlefield: 1,

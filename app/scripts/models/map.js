@@ -3,7 +3,7 @@ Citycrush.Map = DS.Model.extend({
     esriMapId: DS.attr('string')
 });
 
-Citycrush.Objective.FIXTURES = [
+Citycrush.Map.FIXTURES = [
     {
         id: 1,
         title: "Het Noorderplantsoen",
