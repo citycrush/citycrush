@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -41,7 +41,34 @@
           }
       }
 
-      
+      function deviceMotionHandler(eventData) {
+          var info, xyz = "[X, Y, Z]";
+        
+          // Grab the acceleration from the results
+          var acceleration = eventData.acceleration;
+          info = xyz.replace("X", acceleration.x);
+          info = info.replace("Y", acceleration.y);
+          info = info.replace("Z", acceleration.z);
+          document.getElementById("moAccel").innerHTML = info;
+        
+          // Grab the acceleration including gravity from the results
+          acceleration = eventData.accelerationIncludingGravity;
+          info = xyz.replace("X", acceleration.x);
+          info = info.replace("Y", acceleration.y);
+          info = info.replace("Z", acceleration.z);
+          document.getElementById("moAccelGrav").innerHTML = info;
+        
+          // Grab the rotation rate from the results
+          var rotation = eventData.rotationRate;
+          info = xyz.replace("X", rotation.alpha);
+          info = info.replace("Y", rotation.beta);
+          info = info.replace("Z", rotation.gamma);
+          $("#moRotation").html(info);
+        
+          // // Grab the refresh interval from the results
+          info = eventData.interval;
+          $("#moInterval").html(info);       
+      }
 
       function showLocation(location) {
           //zoom to the users location and add a graphic
@@ -152,6 +179,8 @@
   </script>
 </head>
 <body>
+    <div id="moRotation"></div>
+    <div id="moInterval"></div>
   <div id="map" class="map">
     <div id="LocateButton"></div>
   </div>
