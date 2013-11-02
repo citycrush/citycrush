@@ -1,11 +1,11 @@
 Citycrush.Router.map(function () {
   
-  this.resource('leaderboard');
+  //this.resource('leaderboard');
     
-  this.resource('game');  
+  this.route('game');
   
-  this.resource('objectives');
+//  this.resource('objectives');
 
-  this.resource('battle');
+  //this.resource('battle');
   
 });
