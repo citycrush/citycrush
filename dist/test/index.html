@@ -41,6 +41,9 @@
           }
       }
 
+      if ((window.DeviceMotionEvent) {
+          window.addEventListener('devicemotion', deviceMotionHandler, false);
+      }     
       function deviceMotionHandler(eventData) {
           var info, xyz = "[X, Y, Z]";
         
@@ -67,8 +70,10 @@
         
           // // Grab the refresh interval from the results
           info = eventData.interval;
-          $("#moInterval").html(info);       
+          $("#moInterval").html(info);   
       }
+      
+      
 
       function showLocation(location) {
           //zoom to the users location and add a graphic
