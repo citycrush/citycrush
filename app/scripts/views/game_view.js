@@ -1,5 +1,5 @@
-﻿Citycrush.GameView = Em.view.extend({
-    templateName: 'game'
+Citycrush.GameView = Em.View.extend({
+    templateName: 'game',
     didInsertElement: function () {
         var that = this;
         require([
