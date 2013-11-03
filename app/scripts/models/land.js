@@ -16,7 +16,6 @@ Citycrush.Land.FIXTURES = [
         radius: 0,
         kingdom: 1,
         esriMapObjectId: "0"
-        
     },
     {
         id: 2,

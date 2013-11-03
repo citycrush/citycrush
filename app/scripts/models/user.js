@@ -13,7 +13,7 @@ Citycrush.User = DS.Model.extend({
 Citycrush.User.FIXTURES = [
     {
         id: 1,
-        email: "user1@citycrush.co",
+        email: "remko.boschker@gmail.com",
         name: "user1",
         avatar: "/images/avatars/user1.png",
         currentPosition: 3,
