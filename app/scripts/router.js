@@ -3,6 +3,6 @@ Citycrush.Router.map(function () {
     this.route('game');
     this.route('battle');
     this.route('fight');
-    this.route('result');
+    this.route('result', {path: '/result/:yes'} );
     this.route('register');
 });

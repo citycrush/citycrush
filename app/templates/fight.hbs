@@ -1,5 +1,9 @@
 test
 
+{{#each move in moves}}
+    {{move}}
+{{/each}}
+
 <button {{action "move" 1}}>lightning</button>
 <button {{action "move" 2}}>air</button>
 <button {{action "move" 3}}>water</button>

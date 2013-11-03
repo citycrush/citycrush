@@ -14,7 +14,7 @@ Citycrush.Kingdom.FIXTURES = [
         title: "Robert-Jan",
         start: null,
         stop: null,
-        key: "[1,2,4]",
+        key: "[1,2,3]",
         king: 1
     },
     {

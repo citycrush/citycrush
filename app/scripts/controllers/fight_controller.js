@@ -2,9 +2,11 @@ Citycrush.FightController = Em.ObjectController.extend({
     moves: Em.A(),
     actions: {
         move: function(id){
-            if (this.get('moves').length < 3){
-                this.get('moves').addObject(id);
+            var that = this;
+            if (this.get('moves').length < 2){
+                this.get('moves').pushObject(id);
             } else {
+                this.get('moves').pushObject(id);
                 var model = this.get('model');
                 var key = JSON.parse(model.get('key'));
                 var wins = 0;
@@ -18,6 +20,7 @@ Citycrush.FightController = Em.ObjectController.extend({
                             wins++
                         }
                     }
+                    that.set('moves', Em.A());
                 });
                 this.send('result', wins);
             }
