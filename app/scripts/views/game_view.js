@@ -1,4 +1,4 @@
-﻿Citycrush.GameView = Em.View.extend({
+Citycrush.GameView = Em.View.extend({
     templateName: 'game',
     didInsertElement: function () {
         var that = this;
@@ -161,17 +161,21 @@
                     connect.connect(crushLayer, "onClick", function (evt) {
                         // Show battle screen if close enough
                         var loc1 = esri.geometry.webMercatorToGeographic(evt.graphic.geometry);
-                        var loc2 = playerGraphic.geometry;
-                        var dist = distanceTo(loc1, loc2);
-                        if (dist < 20) {
-                            that.get('controller').send('closeEnough', true);
+                        var closeenough;
+                        if (playerGraphic){
+                            var loc2 = playerGraphic.geometry;
+                            closeenough = distanceTo(loc1, loc2) < 20;
+                        }
+                        if (closeenough && playerGraphic) {
+                            that.get('controller').send('closeEnough', evt.graphic.attributes.OBJECTID);
                             var snd = new Audio("/styles/round1fight.mp3"); // buffers automatically when created
                             snd.play();
+                            
                             //$("#moRotation").html("Close enough");
                             // Open battle screen
                         }
                         else {
-                            that.get('controller').send('closeEnough', false);
+                            that.get('controller').send('closeEnough', -1);
                         }
                     });
                     //crushLayer.setDefinitionExpression("OBJECTID < 4");

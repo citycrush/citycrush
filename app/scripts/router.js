@@ -1,6 +1,8 @@
-Citycrush.Router.map(function () {
+Citycrush.Router.map(function () {  
     this.route('leaderboard');  
     this.route('game');
     this.route('battle');
+    this.route('fight');
+    this.route('result');
     this.route('register');
 });

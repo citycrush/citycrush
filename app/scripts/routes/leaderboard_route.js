@@ -1,6 +1,5 @@
-Citycrush.LeaderboardRoute = Ember.Route.extend({
-  model: function(model) {
-    return this.get('store').find('leaderboard', model.leaderboard_id);
-  }
-});
-
+//Citycrush.BattleRoute = Ember.Route.extend({
+//    model: function(objectid) {
+//        return this.get('store').find('land', objectid);
+//    }
+//});
