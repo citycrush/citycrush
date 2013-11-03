@@ -1,22 +1,15 @@
 Citycrush.ApplicationController = Ember.Controller.extend({
-
-    actions: {
-        login: function() {navigator.id.request();},
-        logout: function() {navigator.id.logout();}
-    },
     init: function () {
         this._super();
-        this.set('model', this.get('store').findAll('user').get('firstObject'));
-        console.log(this.get('model.email'));
-
+        console.log(this.get('model'));
         navigator.id.watch({
-            loggedInUser: this.get('model'),
+            loggedInUser: this.get('email'),
             onlogin: function (assertion) {
-                
+                console.log('login');
             },
             onlogout: function () {
-
+                console.log('logout');
             }
         });
     }
-})
+});
