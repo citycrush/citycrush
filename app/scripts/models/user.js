@@ -4,10 +4,10 @@ Citycrush.User = DS.Model.extend({
     avatar: DS.attr('string'),
     currentPosition: DS.belongsTo('position'),
     trace: DS.hasMany('position'),
-    objectives: DS.hasMany('objective'),
     coins: DS.attr('number'),
-    challengesLost: DS.hasMany('challenges'),
-    challengesWon: DS.hasMany('challenges')
+    challengesLost: DS.attr('number'),
+    challengesWon: DS.attr('number'),
+    kingof: DS.hasMany('kingdom')
 });
 
 Citycrush.User.FIXTURES = [
@@ -18,10 +18,10 @@ Citycrush.User.FIXTURES = [
         avatar: "/images/avatars/user1.png",
         currentPosition: 3,
         trace: [3],
-        objectives: [],
         coins: 45,
-        challengesLost: [],
-        challengesWon: []
+        challengesLost: 0,
+        challengesWon: 5,
+        kingof: [1]
     },
     {
         id: 2,
@@ -30,9 +30,9 @@ Citycrush.User.FIXTURES = [
         avatar: "/images/avatars/user2.png",
         currentPosition: 4,
         trace: [4],
-        objectives: [],
         coins: 20,
-        challengesLost: [],
-        challengesWon: []
+        challengesLost: 3,
+        challengesWon: 1,
+        kingof: [2]
     }
 ];

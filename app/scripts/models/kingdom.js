@@ -1,20 +1,21 @@
-Citycrush.Battlefield = DS.Model.extend({
-    position: DS.belongsTo('position'),
+Citycrush.Kingdom = DS.Model.extend({
+    land: DS.belongsTo('land'),
     title: DS.attr('string'),
     start: DS.attr('date'),
     stop: DS.attr('date'),
-    challenges: DS.hasMany('challenge')
+    king: DS.belongsTo('user'),
+    key: DS.hasMany('moves')
 });
 
-Citycrush.Battlefield.FIXTURES = [
+Citycrush.Kingdom.FIXTURES = [
     {
         id: 1,
-        position: 1,
+        land: 1,
         title: "sdfasdf",
         start: null,
         stop: null,
-        challenges: [1,2]
-        
+        key: [1,2,4],
+        king: 1
     },
     {
         id: 2,
@@ -22,6 +23,7 @@ Citycrush.Battlefield.FIXTURES = [
         title: "sdfasdf",
         start: null,
         stop: null,
-        challenges: [3]
+        key: [3,4,1],
+        king: 2
     }
 ];
