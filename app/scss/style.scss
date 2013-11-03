@@ -11,4 +11,9 @@ body > .ember-view {
     height: 100%;
     max-width: 100%;
 }
+
+.clickable:hover {
+    cursor: pointer;
+    border: blue solid 4px;
+}
     
