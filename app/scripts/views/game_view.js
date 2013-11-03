@@ -1,4 +1,4 @@
-Citycrush.GameView = Em.View.extend({
+﻿Citycrush.GameView = Em.View.extend({
     templateName: 'game',
     didInsertElement: function () {
         var that = this;
@@ -41,6 +41,22 @@ Citycrush.GameView = Em.View.extend({
                 var firstTimeZoom = true;
                 var sym = new esri.symbol.SimpleLineSymbol().setColor(new dojo.Color([0, 0, 0, 1]));
                 var circleGraphic;
+
+                var distanceTo = function (from, to) {
+                    var theta = from.x - to.x;
+                    var dist = Math.sin(deg2rad(from.y)) * Math.sin(deg2rad(to.y)) + Math.cos(deg2rad(from.y)) * Math.cos(deg2rad(to.y)) * Math.cos(deg2rad(theta));
+                    dist = Math.acos(dist);
+                    dist = rad2deg(dist);
+                    dist = dist * 60 * 1.1515 * 1.609344 * 1000; // distance in meters
+                    return dist;
+                };
+                var deg2rad = function (deg) {
+                    return (deg * Math.PI / 180.0);
+                };
+
+                var rad2deg = function (rad) {
+                    return (rad / Math.PI * 180.0);
+                };
 
                 var addCircle = function (pt) {
                     console.log("clicked the map: ", pt);
@@ -144,11 +160,14 @@ Citycrush.GameView = Em.View.extend({
                         var loc2 = playerGraphic.geometry;
                         var dist = distanceTo(loc1, loc2);
                         if (dist < 20) {
-                            $("#moRotation").html("Close enough");
+                            that.get('controller').send('closeEnough', true);
+                            var snd = new Audio("/styles/round1fight.mp3"); // buffers automatically when created
+                            snd.play();
+                            //$("#moRotation").html("Close enough");
                             // Open battle screen
                         }
                         else {
-                            $("#moRotation").html("Not close enough");
+                            that.get('controller').send('closeEnough', false);
                         }
                     });
                     //crushLayer.setDefinitionExpression("OBJECTID < 4");
