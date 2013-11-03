@@ -114,7 +114,7 @@ Citycrush.GameView = Em.View.extend({
                     addCircle(pt);
                     //map.centerAndZoom(pt, 16);
                     if (firstTimeZoom) {
-                        that.get('map').centerAt(playerGraphic.geometry);
+                        that.get('map').centerAndZoom(playerGraphic.geometry,16);
                         firstTimeZoom = false;
                     }
                     var crushLayer = that.get('map').getLayersVisibleAtScale()[2];
