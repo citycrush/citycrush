@@ -113,7 +113,7 @@ Citycrush.GameView = Em.View.extend({
                         that.get('map').centerAt(playerGraphic.geometry);
                         firstTimeZoom = false;
                     }
-                    var crushLayer = that.get('map').getLayersVisibleAtScale()[1];
+                    var crushLayer = that.get('map').getLayersVisibleAtScale()[2];
                     var distStr = "";
 
                     /*for (var objId in crushLayer.graphics) {
@@ -153,7 +153,7 @@ Citycrush.GameView = Em.View.extend({
                     //navigator.geolocation.watchPosition(showLocation, locationError);
                     //resizeMap();
                     getLocation();
-                    var crushLayer = that.get('map').getLayersVisibleAtScale()[1];
+                    var crushLayer = that.get('map').getLayersVisibleAtScale()[2];
                     connect.connect(crushLayer, "onClick", function (evt) {
                         // Show battle screen if close enough
                         var loc1 = esri.geometry.webMercatorToGeographic(evt.graphic.geometry);

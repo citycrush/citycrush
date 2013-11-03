@@ -1,0 +1,33 @@
+<h1>register</h1>
+
+<div class="row">
+        <div class="large-6 small-6 columns">
+            <h2>kies je naam</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-6 small-6 columns">
+            <label>naam: </label>
+            {{input valueBinding='name'}}
+        </div>
+    </div>
+<div class="row">
+        <div class="large-6 small-6 columns">
+            <h2>kies je avatar</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-6 small-6 columns">
+          <ul class="small-block-grid-2">
+            <li><img {{action "selectAvatar" "/images/Boy.png"}} src="/images/Boy.png"></li>
+            <li><img {{action "selectAvatar" "/images/Girl.png"}} src="/images/Girl.png"></li>
+            <li><img {{action "selectAvatar" "/images/Girl.png"}} src="/images/Girl.png"></li>
+            <li><img {{action "selectAvatar" "/images/Boy.png"}} src="/images/Boy.png"></li>
+        </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-6 small-6 columns">
+            <a class="button medium" {{action 'register'}}>register</a>
+        </div>
+    </div>

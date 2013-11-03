@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name="viewport" content="initial-scale=1"/>
+        <title></title>
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <!--<script src="/audiojs/audio.min.js"></script>-->
+        <script>
+
+            var motionEvents = new Array();
+            var motionIdx = 0;
+            var lastEventTime = new Date().getTime();
+            var snd;
+
+            /*audiojs.events.ready(function () {
+                var as = audiojs.createAll();
+            });*/
+
+            var deviceMotionHandler = function (eventData) {
+                var info;
+                var infoRot;
+
+                // Grab the acceleration from the results
+                var acceleration = eventData.accelerationIncludingGravity;
+                info = [acceleration.x, acceleration.y, acceleration.z];
+                var rotation = eventData.rotationRate;
+                infoRot = [rotation.alpha, rotation.beta, rotation.gamma];
+                var maxAccell = Math.max.apply(Math, info.map(function (i) {
+                    return Math.abs(i);
+                }));
+
+                
+                var sensVectLength = Math.sqrt(info[0] * info[0] + info[1] * info[1] + info[2] * info[2]);
+                var rotVectLength = Math.sqrt(infoRot[0] * infoRot[0] + infoRot[1] * infoRot[1] + infoRot[2] * infoRot[2]);
+                var rotVectLengthA = Math.sqrt(infoRot[0] * infoRot[0]);
+                var timeSinceEvent = new Date().getTime() - lastEventTime;
+                $("#motion").html(sensVectLength);
+                $("#motion").html(rotVectLength);
+                //var snd = new Audio("http://www.gpsplay.nl/Styles/WaterSplash.mp3"); // buffers automatically when created
+                //snd.play();
+                //$("#constantGesture").html(info[0] + "</br> " + info[1] + "</br> " + info[2] + "</br> ------------------------ </br> ");
+
+                /*if (rotVectLength > 14) {
+                    $("#constantGesture").html(rotVectLength);
+                    $("#lastGesture").html(Math.abs(infoRot[0]) + " " + Math.abs(infoRot[1]) + " " + Math.abs(infoRot[2]) + " RA" + rotVectLengthA);
+                    if (timeSinceEvent > 2000 && rotVectLength > 14 && rotVectLengthA > 13)// && Math.abs(infoRot[1]) < 4 && Math.abs(infoRot[2]) > 13) 
+                    {
+                        $("#gesture").html("Water");
+                    }
+                }*/
+
+                //$("#lastGesture").html(info[0] + " " + info[1] + " " + info[2]);
+                if (true) {
+                    // Water
+                    if (timeSinceEvent > 2000 && sensVectLength > 9 && rotVectLength > 14 && Math.abs(infoRot[0]) < 6 && Math.abs(infoRot[1]) > 16 && Math.abs(infoRot[2]) < 6) {
+                        $("#lastGesture").html(Math.abs(infoRot[0]) + " " + Math.abs(infoRot[1]) + " " + Math.abs(infoRot[2]) + " RA" + rotVectLengthA);
+                        $("#gesture").html("Water");
+                        lastEventTime = new Date().getTime();
+                        timeSinceEvent = new Date().getTime() - lastEventTime;
+                        //snd = new Audio("http://www.gpsplay.nl/Styles/WaterSplash.mp3"); // buffers automatically when created
+                        //snd.play();
+                    }
+                    // Lighting
+                    if (timeSinceEvent > 2000 && sensVectLength > 20 && Math.abs(info[0]) > 15 && Math.abs(info[1]) > 15 && Math.abs(info[2]) > 15) {
+                        $("#lastGesture").html(info[0] + " " + info[1] + " " + info[2] + " " + sensVectLength);
+                        $("#gesture").html("Lightning");
+                        lastEventTime = new Date().getTime();
+                        timeSinceEvent = new Date().getTime() - lastEventTime;
+                        //snd = new Audio("http://www.gpsplay.nl/Styles/Thunder.mp3"); // buffers automatically when created
+                        //snd.play();
+                    }
+                    // Air
+                    if (timeSinceEvent > 2000 && sensVectLength < 2) {
+                        $("#lastGesture").html(info[0] + " " + info[1] + " " + info[2] + " " + sensVectLength);
+                        $("#gesture").html("Air");
+                        lastEventTime = new Date().getTime();
+                        timeSinceEvent = new Date().getTime() - lastEventTime;
+                        //snd = new Audio("http://www.gpsplay.nl/Styles/Whoosh.mp3"); // buffers automatically when created
+                        //snd.play();
+                    }
+                }
+
+            };
+
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('devicemotion', deviceMotionHandler, false);
+            }    
+        
+        </script>
+    </head>
+    <body>
+        
+        <div id="motion"></div>
+        <div id="constantGesture"></div>
+        <div id="lastGesture"></div>
+        <div id="gesture"></div>
+        <div id="sound"></div>
+    </body>
+</html>
