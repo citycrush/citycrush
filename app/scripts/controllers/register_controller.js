@@ -2,6 +2,8 @@ Citycrush.RegisterController = Ember.ObjectController.extend({
     
     selectedAvatar: function(){
         var avatarUrl = this.get('avatar');
+        console.log('avatarurl');
+        console.log(avatarUrl);
         if (avatarUrl === undefined || avatarUrl === null || avatarUrl === "")
             return "/images/lege-avatar.png"
         else {
