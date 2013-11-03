@@ -7,7 +7,7 @@ Citycrush.ApplicationController = Ember.Controller.extend({
         Citycrush.currentUser = {
             id: 1,
             email: "remko.boschker@gmail.com",
-            name: "user1",
+            name: "",
             avatar: "/images/avatars/user1.png",
             currentPosition: 3,
             trace: [3],

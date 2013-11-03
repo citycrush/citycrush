@@ -2,7 +2,7 @@
 
 <div class="row">
         <div class="large-6 small-6 columns">
-            <h2>registreren</h2>
+            <h2>kies je naam</h2>
         </div>
     </div>
     <div class="row">
@@ -11,10 +11,19 @@
             {{input valueBinding='name'}}
         </div>
     </div>
+<div class="row">
+        <div class="large-6 small-6 columns">
+            <h2>kies je avatar</h2>
+        </div>
+    </div>
     <div class="row">
         <div class="large-6 small-6 columns">
-            <label>email: </label>
-            {{input valueBinding='email'}}
+          <ul class="small-block-grid-2">
+            <li><img {{action "selectAvatar"}} src="/images/avatars/1.png"></li>
+            <li><img {{action "selectAvatar"}} src="/images/avatars/1.png"></li>
+            <li><img {{action "selectAvatar"}} src="/images/avatars/1.png"></li>
+            <li><img {{action "selectAvatar"}} src="/images/avatars/1.png"></li>
+              </ul>
         </div>
     </div>
     <div class="row">
