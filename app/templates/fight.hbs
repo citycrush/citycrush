@@ -1,9 +1,12 @@
-test
+<div style="background-image:url('/images/challenge-background.png'); background-size: cover; background-repeat: no-repeat; height: 100%; max-width: 100%;">
 
-{{#each move in moves}}
-    {{move}}
-{{/each}}
-
-<button {{action "move" 1}}>lightning</button>
-<button {{action "move" 2}}>air</button>
-<button {{action "move" 3}}>water</button>
+    test
+    
+    {{#each move in moves}}
+        <img height="50" width="50" {{bind-attr src="move"}}/>
+    {{/each}}
+    
+    <button {{action "move" 1}}>lightning</button>
+    <button {{action "move" 2}}>air</button>
+    <button {{action "move" 3}}>water</button>
+</div>
