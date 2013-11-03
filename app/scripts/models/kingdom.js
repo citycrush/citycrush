@@ -4,7 +4,7 @@ Citycrush.Kingdom = DS.Model.extend({
     start: DS.attr('date'),
     stop: DS.attr('date'),
     king: DS.belongsTo('user'),
-    key: DS.hasMany('move')
+    key: DS.attr('string')
 });
 
 Citycrush.Kingdom.FIXTURES = [
@@ -14,7 +14,7 @@ Citycrush.Kingdom.FIXTURES = [
         title: "Robert-Jan",
         start: null,
         stop: null,
-        key: [1,2,4],
+        key: "[1,2,4]",
         king: 1
     },
     {
@@ -23,7 +23,7 @@ Citycrush.Kingdom.FIXTURES = [
         title: "sdfasdf",
         start: null,
         stop: null,
-        key: [3,4,1],
+        key: "[3,4,1]",
         king: 2
     }
 ];
