@@ -11,6 +11,16 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(function (req, res, next) {
+  // see above
+  res.setHeader('Strict-Transport-Security', 'max-age=8640000; includeSubDomains');
+
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(301, 'https://' + req.headers.host + '/');
+  }
+
+  next();
+})
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'dist')));
 
@@ -19,10 +29,6 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-http.get('*',function(req,res){  
-    res.redirect('https://citycrush.jit.su'+req.url)
-})
-
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(8090, function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
