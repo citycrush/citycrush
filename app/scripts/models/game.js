@@ -9,4 +9,4 @@ Citycrush.Game.FIXTURES = [
         map: 1,
         battlefields: [1,2]
     }
-]
+];
