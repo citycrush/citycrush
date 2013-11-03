@@ -5,3 +5,10 @@
 .selected {
     border: red solid 3px;
 }
+
+body > .ember-view {
+    min-height: 100%;
+    height: 100%;
+    max-width: 100%;
+}
+    

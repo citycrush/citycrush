@@ -1,5 +1,6 @@
 Citycrush.ApplicationRoute = Ember.Route.extend({
 
+    
 //    init: function(){
 //    },
 //    // admittedly, this should be in IndexRoute and not in the
