@@ -21,6 +21,9 @@ app.use(express.methodOverride());
 //
 //  next();
 //})
+
+
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'dist')));
 
