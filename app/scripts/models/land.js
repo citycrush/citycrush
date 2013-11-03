@@ -3,7 +3,8 @@ Citycrush.Land = DS.Model.extend({
     long: DS.attr('number'),
     name: DS.attr('string'),
     radius: DS.attr('number'),
-    kingdom: DS.belongsTo('kingdom')
+    kingdom: DS.belongsTo('kingdom'),
+    esriMapObjectId: DS.attr('string')
 });
 
 Citycrush.Land.FIXTURES = [
@@ -13,7 +14,9 @@ Citycrush.Land.FIXTURES = [
         long: 6.5544,
         name: "dfsdf",
         radius: 0,
-        kingdom: 1
+        kingdom: 1,
+        esriMapObjectId: "0"
+        
     },
     {
         id: 2,
@@ -21,6 +24,7 @@ Citycrush.Land.FIXTURES = [
         long: 6.5545,
         name: "sdgasgasgsdg",
         radius: 0,
-        kingdom: 2
+        kingdom: 2,
+        esriMapObjectId: "0"
     }
 ]
