@@ -1,20 +1,17 @@
 Citycrush.RegisterController = Ember.ObjectController.extend({
 
-    selectedAvatar: function () {
+    selectedAvatar:"/images/lege_avatar.png",
+    updateSelectedAvatar: function () {
         var avatarUrl = this.get('avatar');
-        console.log('avatarurl');
-        console.log(avatarUrl);
         if (avatarUrl === undefined || avatarUrl === null || avatarUrl === "") {
-            console.log('leeg');
-            return "/images/lege_avatar.png"
+            this.set('selectedAvatar',"/images/lege_avatar.png");
         } else {
-            return avatarUrl;
+            this.set('selectedAvatar',avatarUrl);
         }
-    }.property('avatar').on('init'),
-
+    }.observes('avatar'),
     actions: {
         selectAvatar: function (avatar) {
             this.set('avatar', avatar);
-        }
+        }                                                     
     }
 });
