@@ -1,12 +1,14 @@
 Citycrush.Game = DS.Model.extend({
     map: DS.belongsTo('map'),
-    battlefields: DS.hasMany('battlefield')
+    kingsdoms: DS.hasMany('kingdom'),
+    lands: DS.hasMany('land')
 });
 
 Citycrush.Game.FIXTURES = [
     {
         id: 1,
         map: 1,
-        battlefields: [1,2]
+        kingdoms: [1,2],
+        lands: [1,2]
     }
 ];
