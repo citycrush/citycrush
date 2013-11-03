@@ -4,4 +4,5 @@ Citycrush.Router.map(function () {
     this.route('battle');
     this.route('fight');
     this.route('result');
+    this.route('register');
 });

@@ -2,6 +2,7 @@ Citycrush.IndexRoute = Ember.Route.extend({
 
     actions: {
         afterLogin: function () {
+            var zis = this
             console.log('after login');
             this.store.find('user', 1).then(function (user) {
                 console.log(user.get('avatar'));
@@ -10,10 +11,10 @@ Citycrush.IndexRoute = Ember.Route.extend({
 
                 if (name === undefined || name === null || name === "" 
                     || avatar === undefined || avatar === null || avatar === "") {
-                    this.transitionTo('register');
+                    zis.transitionTo('register');
                 } else {
-                    console.log('route to game');
-                    this.transitionTo('game');
+                    console.log(zis);
+                    zis.transitionTo('game');
                 }
                 return user;
             });
