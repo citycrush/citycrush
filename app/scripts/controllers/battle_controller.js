@@ -5,6 +5,14 @@ Citycrush.Battle = Ember.ObjectController.extend({
             window.addEventListener('devicemotion', this.deviceMotionHandler, false);
         }
     },
+    actions: {
+        hammer: function (maxAccell) {
+            // Hammmer time!
+            alert('hammer');
+            var snd = new Audio("/styles/Swirl.mp3"); // buffers automatically when created
+            snd.play();
+        }
+    },
     deviceMotionHandler: function (eventData) {
         var info, xyz = "[X, Y, Z]";
 
