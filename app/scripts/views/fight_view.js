@@ -1,4 +1,4 @@
-﻿Citycrush.BattleView = Em.View.extend({
+Citycrush.FightView = Em.View.extend({
     templateName: 'battle',
     init: function () {
         this._super();
@@ -9,7 +9,6 @@
                 that.get('deviceMotionHandler').apply(that, [e])
             }, false);
         };
-
     },
     deviceMotionHandler: function (eventData) {
         var info;

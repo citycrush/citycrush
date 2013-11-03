@@ -12,7 +12,7 @@ Citycrush.Land.FIXTURES = [
         id: 1,
         lat: 53.2218,
         long: 6.5544,
-        name: "dfsdf",
+        name: "Robert-Jan",
         radius: 0,
         kingdom: 1,
         esriMapObjectId: "0"
@@ -26,4 +26,4 @@ Citycrush.Land.FIXTURES = [
         kingdom: 2,
         esriMapObjectId: "0"
     }
-]
+];

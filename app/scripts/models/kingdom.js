@@ -4,14 +4,14 @@ Citycrush.Kingdom = DS.Model.extend({
     start: DS.attr('date'),
     stop: DS.attr('date'),
     king: DS.belongsTo('user'),
-    key: DS.hasMany('moves')
+    key: DS.hasMany('move')
 });
 
 Citycrush.Kingdom.FIXTURES = [
     {
         id: 1,
         land: 1,
-        title: "sdfasdf",
+        title: "Robert-Jan",
         start: null,
         stop: null,
         key: [1,2,4],

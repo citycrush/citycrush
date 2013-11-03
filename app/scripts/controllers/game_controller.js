@@ -2,13 +2,14 @@ Citycrush.GameController = Ember.ObjectController.extend({
     map: null,
     
     actions: {
-        closeEnough: function (yes) {
-            if (yes) {
+        closeEnough: function (id) {
+            if (id > 0) {
                 this.set('closeEnough', "Whooohoo you're in range FIGHT!!");
+                this.send('startBattle', id);
             } else {
                 this.set('closeEnough', "not yet!");
             }
-        }
+        },
     }
     // Implement your controller here.
     //    distanceTo: function (from, to)

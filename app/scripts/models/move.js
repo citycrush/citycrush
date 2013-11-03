@@ -1,6 +1,6 @@
 Citycrush.Move = DS.Model.extend({
     title: DS.attr('string'),
-    beats: DS.hasMany('moves')
+    beats: DS.hasMany('move')
 });
 
 Citycrush.Move.FIXTURES = [
