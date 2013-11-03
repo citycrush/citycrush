@@ -4,19 +4,7 @@ Citycrush.ApplicationController = Ember.Controller.extend({
         var zis = this;
         // hack login
 
-        Citycrush.currentUser = {
-            id: 1,
-            email: "remko.boschker@gmail.com",
-            name: "",
-            avatar: "/images/avatars/user1.png",
-            currentPosition: 3,
-            trace: [3],
-            coins: 45,
-            challengesLost: 0,
-            challengesWon: 5,
-            kingof: [1]
-        };
-
+        Citycrush.currentUser = 1;
         var currentUser = {};//Citycrush.currentUser;
 
         function simpleXhrSentinel(xhr) {
