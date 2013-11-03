@@ -15,7 +15,7 @@ Citycrush.User.FIXTURES = [
         id: 1,
         email: "remko.boschker@gmail.com",
         name: "user1",
-        avatar: "/images/avatars/user1.png",
+        avatar: "",
         currentPosition: 3,
         trace: [3],
         coins: 45,
